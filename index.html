@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bazar App</title>
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<!-- production version, optimized for size and speed -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+
+   <center> <h1 class="jumbotron">Bazar Calculation  App</h1> </center>
+
+<div class="container" id="app">
+		  <h2 class="text-success">Bazar Calculation App With Vue JS</h2>
+		  <hr>
+		  <form @submit.prevent="addItem">
+		  	<input type="text" v-model="newItem" class="form-control">
+		  
+		  </form>
+		  <br>
+		  <hr>
+		  <ul class="list-group">
+		    <li class="list-group-item" v-key="index" v-for="(item,index) in items">
+
+		    	<button class="btn btn-xs  btn-danger" @click="removeItem(index)">remove</button> {{item.name}}  -  <input type="number" v-model="item.price"> 
+		    </li> 
+		    <hr>
+		 
+		     <li class="list-group-item">Total Price : {{total}}</li>
+
+		  </ul>
+
+</div>
+
+<script type="text/javascript">
+	
+var app = new Vue({
+  el:"#app",
+  data:{
+  	items:[
+     {name:"Mango",price:89},
+     {name:"Gova",price:50},
+     {name:"Banana",price:20},
+     {name:"Mango",price:20}
+  	],
+  	 newItem : "",
+  	
+  },
+  computed : {
+     total(){
+     	var total_price = 0;
+     	this.items.forEach(item => {
+           total_price += parseFloat(item.price);
+     	});
+     	return total_price;
+     	}
+
+    
+
+  },
+
+  methods:{
+  	addItem(){
+      this.items.push({
+        	name : this.newItem,
+            price : "0.00"
+      })
+  	},
+  	removeItem(index){
+  		 this.items.splice(index,1);
+  	}
+  }
+ 
+
+});
+
+</script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+</body>
+</html>
